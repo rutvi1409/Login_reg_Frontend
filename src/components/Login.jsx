@@ -2,37 +2,48 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Login() {
-  const [username, setusername] = useState();
-  const [password, setpassword] = useState();
+  const [user, setuser] = useState({
+    username: "",
+    password: "",
+  });
 
-  const handleChange = () => console.log("object");
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setuser({ ...user, [name]: value });
+  };
 
+const redirecttoregister = () => {
+    window.location("/register")
+}
+  
   return (
     <div className="container">
       <form>
-        <h1>Login Form</h1>
-		<div className="form-group">
-          <label className="label">Username</label>
-          <input
-            className="form-control"
-            type="text"
-            value={username}
-            onChange={handleChange}
-            placeholder="Enter Name"
-          />
-        </div>
-        <div className="form-group">
-          <label className="label">Password</label>
-          <input
-            type="text"
-			className="form-control"
-            value={password}
-            onChange={handleChange}
-            placeholder="Enter Password"
-          />
-        </div>
-		<button className="btn btn-primary">Submit</button>
-		
+        <h1 className="text-center">Login Form</h1>
+         <div className="form-group col-6">
+            <label className="label my-2">Username</label>
+            <input
+              className="form-control"
+              type="text"
+              name="username"
+              value={user.username}
+              onChange={handleChange}
+              placeholder="Enter Username"
+            />
+          </div>
+          <div className="form-group col-6">
+            <label className="label my-2">Password</label>
+            <input
+              className="form-control"
+              type="text"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+              placeholder="Enter Password"
+            />
+          </div>
+        <button className="btn btn-primary mt-2">Submit</button>
+        <button className="btn btn-warning mt-2 mx-2" onClick={redirecttoregister}>Register</button>
       </form>
     </div>
   );
